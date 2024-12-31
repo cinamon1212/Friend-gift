@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import Snowfall from 'react-snowfall';
 
 import './App.css';

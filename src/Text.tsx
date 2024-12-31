@@ -1,17 +1,17 @@
 import React from 'react';
 
 interface Props {
-  letterStyles: {
+  textStyles: {
     opacity: number;
     transform: string;
   };
   handleEnvClick: () => void;
 }
 
-export const Text = React.memo(({ letterStyles, handleEnvClick }: Props) => {
+export const Text = React.memo(({ textStyles, handleEnvClick }: Props) => {
   console.log('render');
   return (
-    <div className="text" style={letterStyles} onClick={handleEnvClick}>
+    <div className="text" style={textStyles} onClick={handleEnvClick}>
       <div
         style={{
           overflow: 'hidden',

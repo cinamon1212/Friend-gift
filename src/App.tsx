@@ -3,16 +3,13 @@ import Snowfall from 'react-snowfall';
 
 import './App.css';
 import { Text } from './Text';
+import { useTextStyles } from './useTextStyles';
 
-const LETTER_STYLES = {
-  opacity: 0,
-  transform: 'scale(0)'
-};
+
 
 const App = React.memo(() => {
   const isEnvOpen = useRef(false);
   const [state, setState] = useState({
-    letterStyles: LETTER_STYLES,
     topOpacity: 1,
     topOpenOpacity: 0
   });
@@ -20,21 +17,16 @@ const App = React.memo(() => {
   const handleEnvClick = useCallback(() => {
     if (isEnvOpen.current) {
       isEnvOpen.current = false;
-      setState((prev) => ({ ...prev, letterStyles: LETTER_STYLES }));
       setTimeout(() => {
-        setState((prev) => ({ ...prev, topOpacity: 1, topOpenOpacity: 0 }));
+        setState({ topOpacity: 1, topOpenOpacity: 0 });
       }, 600);
     } else {
       isEnvOpen.current = true;
-      setState((prev) => ({ ...prev, topOpacity: 0, topOpenOpacity: 1 }));
-      setTimeout(() => {
-        setState((prev) => ({
-          ...prev,
-          letterStyles: { opacity: 1, transform: 'scale(1)' }
-        }));
-      }, 1000);
+      setState({ topOpacity: 0, topOpenOpacity: 1 });
     }
   }, []);
+
+  const textStyles = useTextStyles(1000, 0, isEnvOpen.current)
 
   return (
     <>
@@ -81,10 +73,10 @@ const App = React.memo(() => {
           />
           <img src="down.svg" alt="" className="env-down" />
         </div>
-        <Text
-          letterStyles={state.letterStyles}
-          handleEnvClick={handleEnvClick}
-        />
+          <Text
+            textStyles={textStyles}
+            handleEnvClick={handleEnvClick}
+          />
       </main>
     </>
   );

@@ -1,14 +1,15 @@
-import { useRef, useState } from 'react';
+import React, { useCallback, useMemo, useRef, useState } from 'react';
 import Snowfall from 'react-snowfall';
 
 import './App.css';
+import { Text } from './Text';
 
 const LETTER_STYLES = {
   opacity: 0,
   transform: 'scale(0)'
 };
 
-function App() {
+const App = React.memo(() => {
   const isEnvOpen = useRef(false);
   const [state, setState] = useState({
     letterStyles: LETTER_STYLES,
@@ -16,7 +17,7 @@ function App() {
     topOpenOpacity: 0
   });
 
-  const handleEnvClick = () => {
+  const handleEnvClick = useCallback(() => {
     if (isEnvOpen.current) {
       isEnvOpen.current = false;
       setState((prev) => ({ ...prev, letterStyles: LETTER_STYLES }));
@@ -33,7 +34,7 @@ function App() {
         }));
       }, 1000);
     }
-  };
+  }, []);
 
   return (
     <>
@@ -80,42 +81,13 @@ function App() {
           />
           <img src="down.svg" alt="" className="env-down" />
         </div>
-        <div className="text" style={state.letterStyles} onClick={handleEnvClick}>
-          <div
-            style={{
-              overflow: 'hidden',
-              position: 'relative',
-              width: '100%',
-              height: '100px'
-            }}
-          >
-            <img
-              src="items.svg"
-              alt=""
-              style={{
-                width: '200%',
-                height: '100%',
-                zIndex: 10000,
-                position: 'absolute',
-                borderRadius: '10%'
-              }}
-            />
-          </div>
-          <img
-            src="gift.svg"
-            alt=""
-            style={{
-              position: 'absolute',
-              bottom: 0,
-              left: 0,
-              width: '100%',
-              borderRadius: '10%'
-            }}
-          />
-        </div>
+        <Text
+          letterStyles={state.letterStyles}
+          handleEnvClick={handleEnvClick}
+        />
       </main>
     </>
   );
-}
+});
 
 export default App;

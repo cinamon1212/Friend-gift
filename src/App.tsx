@@ -10,24 +10,27 @@ const LETTER_STYLES = {
 
 function App() {
   const isEnvOpen = useRef(false);
-  const [letterStyles, setLetterStyles] = useState(LETTER_STYLES);
-  const [topOpacity, setTopOpacity] = useState(1);
-  const [topOpenOpacity, setTopOpenOpacity] = useState(0);
+  const [state, setState] = useState({
+    letterStyles: LETTER_STYLES,
+    topOpacity: 1,
+    topOpenOpacity: 0
+  });
 
   const handleEnvClick = () => {
     if (isEnvOpen.current) {
       isEnvOpen.current = false;
-      setLetterStyles(LETTER_STYLES);
+      setState((prev) => ({ ...prev, letterStyles: LETTER_STYLES }));
       setTimeout(() => {
-        setTopOpacity(1);
-        setTopOpenOpacity(0);
+        setState((prev) => ({ ...prev, topOpacity: 1, topOpenOpacity: 0 }));
       }, 600);
     } else {
       isEnvOpen.current = true;
-      setTopOpacity(0);
-      setTopOpenOpacity(1);
+      setState((prev) => ({ ...prev, topOpacity: 0, topOpenOpacity: 1 }));
       setTimeout(() => {
-        setLetterStyles({ opacity: 1, transform: 'scale(1)' });
+        setState((prev) => ({
+          ...prev,
+          letterStyles: { opacity: 1, transform: 'scale(1)' }
+        }));
       }, 1000);
     }
   };
@@ -52,7 +55,7 @@ function App() {
             alt=""
             className={'env-top'}
             style={{
-              opacity: topOpacity
+              opacity: state.topOpacity
             }}
           />
           <img
@@ -60,7 +63,7 @@ function App() {
             alt=""
             className={'env-top_open'}
             style={{
-              opacity: topOpenOpacity
+              opacity: state.topOpenOpacity
             }}
           />
           <img
@@ -77,8 +80,15 @@ function App() {
           />
           <img src="down.svg" alt="" className="env-down" />
         </div>
-        <div className="text" style={letterStyles} onClick={handleEnvClick}>
-          <div style={{ overflow: 'hidden', position:'relative', width:'100%', height:'100px' }}>
+        <div className="text" style={state.letterStyles} onClick={handleEnvClick}>
+          <div
+            style={{
+              overflow: 'hidden',
+              position: 'relative',
+              width: '100%',
+              height: '100px'
+            }}
+          >
             <img
               src="items.svg"
               alt=""

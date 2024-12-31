@@ -9,21 +9,21 @@ const LETTER_STYLES = {
 };
 
 function App() {
-  const [isEnvOpen, setIsEnvOpen] = useState(false);
+  const isEnvOpen = useRef(false);
   const [letterStyles, setLetterStyles] = useState(LETTER_STYLES);
   const [topOpacity, setTopOpacity] = useState(1);
   const [topOpenOpacity, setTopOpenOpacity] = useState(0);
 
   const handleEnvClick = () => {
-    if (isEnvOpen) {
-      setIsEnvOpen(false)
+    if (isEnvOpen.current) {
+      isEnvOpen.current = false;
       setLetterStyles(LETTER_STYLES);
       setTimeout(() => {
         setTopOpacity(1);
         setTopOpenOpacity(0);
       }, 600);
     } else {
-      setIsEnvOpen(false)
+      isEnvOpen.current = true;
       setTopOpacity(0);
       setTopOpenOpacity(1);
       setTimeout(() => {
@@ -38,7 +38,7 @@ function App() {
         <img src="ne_background.jpg" alt="bg" className="background" />
         <Snowfall />
         <div
-          className={`envelope ${isEnvOpen ? 'open' : 'close'}`}
+          className={`envelope ${isEnvOpen.current ? 'open' : 'close'}`}
           onClick={handleEnvClick}
         >
           <div className="letter">

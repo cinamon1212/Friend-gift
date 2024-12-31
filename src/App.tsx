@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import Snowfall from 'react-snowfall';
 
 import './App.css';
@@ -13,22 +13,6 @@ function App() {
   const [letterStyles, setLetterStyles] = useState(LETTER_STYLES);
   const [topOpacity, setTopOpacity] = useState(1);
   const [topOpenOpacity, setTopOpenOpacity] = useState(0);
-
-  // useEffect(() => {
-  //   if (isEnvOpen.current) {
-  //     setTopOpacity(0);
-  //     setTopOpenOpacity(1);
-  //     setTimeout(() => {
-  //       setLetterStyles({ opacity: 1, transform: 'scale(1)' });
-  //     }, 1000);
-  //   } else {
-  //     setLetterStyles(LETTER_STYLES);
-  //     setTimeout(() => {
-  //       setTopOpacity(1);
-  //       setTopOpenOpacity(0);
-  //     }, 1000);
-  //   }
-  // }, [isEnvOpen]);
 
   const handleEnvClick = () => {
     if (isEnvOpen.current) {

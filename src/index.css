@@ -1,0 +1,17 @@
+*,
+body,
+html {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  --color-env: #0077B2;
+  --color-env97: #016a9f;
+  --color-env80: #004d73;
+  --env-border-radius: 6px;
+  --env-width: 200px;
+  --env-height: 120px;
+}
+

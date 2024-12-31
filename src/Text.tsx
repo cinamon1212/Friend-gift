@@ -60,7 +60,7 @@ export const Text = React.memo(({ textStyles, handleEnvClick }: Props) => {
         alt=""
         style={{
           width: '100%',
-          height: '150px',
+          height: '80px',
           top: 0,
           left: 0,
           zIndex: 10000,
@@ -73,10 +73,10 @@ export const Text = React.memo(({ textStyles, handleEnvClick }: Props) => {
           flexDirection: 'column',
           gap: '15px',
           fontSize: '16px',
-          paddingTop: '110px',
+          paddingTop: '70px',
           paddingLeft: '10px',
           paddingRight: '10px',
-          paddingBottom: '100px'
+          paddingBottom: '70px'
         }}
       >
         {paragraphs.map((paragraph, idx) => {
